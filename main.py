@@ -38,12 +38,16 @@ def main():
             
         updatable.update(dt) # Update all objects
 
-        # Check collisions between asteroids and the player
+        # Check collisions 
         for asteroid in asteroids:
-            if asteroid.collision_check(player):
+            if asteroid.collision_check(player): # Between each asteroids and the player
                 print("GAME OVER")
                 pygame.quit()
                 sys.exit()
+            for shot in shots: # Between each shot and the asteroid.
+                if asteroid.collision_check(shot):
+                    asteroid.split()
+                    shot.kill()
 
         screen.fill("black") # Clear screen
 
